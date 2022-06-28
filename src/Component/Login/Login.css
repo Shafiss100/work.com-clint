@@ -1,0 +1,14 @@
+.login-page{
+    color: transparent;
+    background: url(https://cdn.pixabay.com/photo/2018/08/21/23/29/forest-3622519_960_720.jpg);
+    background-size: cover;
+    background-color: rgba(0,0,0, .3);
+    background-blend-mode: overlay;
+    
+}
+.login-box{
+    background-color: rgba(226, 236, 245, 0.144);
+}
+.card-body input::placeholder{
+    color: rgb(51, 255, 0);
+}
