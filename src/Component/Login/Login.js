@@ -3,14 +3,13 @@ import "./Login.css";
 import facebook from "../Photos/facebook.png";
 import google from "../Photos/google.png";
 import { Link, useNavigate } from 'react-router-dom';
-import {useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { signOut } from "firebase/auth";
 
 
 const Login = () => {
-  const { allerror, setError } = useState("");
-  console.log(allerror)
+  const navigare = useNavigate();
   const [user, userLoading, userError] = useAuthState(auth);
   const [
     signInWithEmailAndPassword,
@@ -18,16 +17,19 @@ const Login = () => {
     loading,
     error,
   ] = useSignInWithEmailAndPassword(auth);
-  const navigate = useNavigate();
+
   const dlogin = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    signInWithEmailAndPassword(email, password);
-    if (error) {
-      console.log(error);
-    }
-    
+    signInWithEmailAndPassword(email, password)
+      .then(() => {
+        navigare("/home")
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+
   }
   return (
     <form onSubmit={dlogin}>
@@ -54,8 +56,8 @@ const Login = () => {
                   <Link to="/signup" className="label-text-alt link link-hover text-white">create a new acount/signup</Link>
                 </label>
                 {
-                  allerror && <p className='text-2xl text-red-500'>{allerror.message}</p>
-               }
+                  error && <p className='text-2xl text-red-500'>{error.message}</p>
+                }
               </div>
               <div className="form-control mt-6">
                 <input type="submit" className="btn btn-primary" value={"Login"} />

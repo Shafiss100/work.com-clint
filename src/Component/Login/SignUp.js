@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const SignUp = () => {
-    const { allerror, setError } = useState("");
+    const navigare = useNavigate();
     const [
         createUserWithEmailAndPassword,
         user,
@@ -16,7 +16,14 @@ const SignUp = () => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
-        createUserWithEmailAndPassword(email, password);
+        createUserWithEmailAndPassword(email, password)
+            .then(() => {
+                navigare("/home")
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+
     }
     return (
         <form onSubmit={signup}>
@@ -46,6 +53,9 @@ const SignUp = () => {
 
                             </div>
                             <Link to={"/"} className="label-text-alt link link-hover text-white">Already have an acount/login</Link>
+                            {
+                                error && <p className='text-2xl text-red-500'>{error.message}</p>
+                            }
                             <div className="form-control mt-6">
                                 <input type="submit" className="btn btn-primary" value={"signup"} />
                             </div>
