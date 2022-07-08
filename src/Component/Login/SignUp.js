@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const SignUp = () => {
+    const [updateProfile, updating, upError] = useUpdateProfile(auth);
     const navigare = useNavigate();
     const [
         createUserWithEmailAndPassword,
@@ -16,9 +17,11 @@ const SignUp = () => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
+        const displayName = event.target.name.value;
         createUserWithEmailAndPassword(email, password)
-            .then(() => {
-                navigare("/home")
+            .then(async() => {
+                await updateProfile({displayName})
+                navigare("/")
             })
             .catch((error) => {
                 console.log(error.message);

@@ -2,7 +2,7 @@
     color: transparent;
     background: url(https://img.freepik.com/free-vector/office-background-video-conferencing_52683-45471.jpg?t=st=1656466581~exp=1656467181~hmac=f0dee3a015ce90b8cc925009c9bf7a388103726d44742b4121f0abc157546d1b&w=1380);
     background-size: cover;
-    background-color: rgba(0,0,0, .3);
+    background-color: rgba(0,0,0, .5);
     background-blend-mode: overlay;
     
 }
@@ -15,7 +15,7 @@
     color: rgb(0, 0, 0);
 }
 .card-body input::placeholder{
-    color: rgb(25, 56, 17);
+    color: rgb(255, 250, 250);
 }
 .login-icons{
     display: flex;

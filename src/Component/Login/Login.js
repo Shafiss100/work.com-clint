@@ -3,7 +3,7 @@ import "./Login.css";
 import facebook from "../Photos/facebook.png";
 import google from "../Photos/google.png";
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { signOut } from "firebase/auth";
 
@@ -18,13 +18,24 @@ const Login = () => {
     error,
   ] = useSignInWithEmailAndPassword(auth);
 
+  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+  const glogin = () => {
+    signInWithGoogle()
+      .then(() => {
+        navigare("/")
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
+
   const dlogin = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
     signInWithEmailAndPassword(email, password)
       .then(() => {
-        navigare("/home")
+        navigare("/")
       })
       .catch((error) => {
         console.log(error.message);
@@ -60,15 +71,11 @@ const Login = () => {
                 }
               </div>
               <div className="form-control mt-6">
-                <input type="submit" className="btn btn-primary" value={"Login"} />
+                <input type="submit" className="btn text-white btn-primary" value={"Login"} />
                 <div className='login-icons'>
-                  <img src={google} alt="google" />
+                  <img onClick={glogin} src={google} alt="google" />
                   <img src={facebook} alt="facebook" />
-                  {
-                    user && <li>
-                      <button className='border text-green-600' onClick={() => signOut(auth)}>sign out</button>
-                    </li>
-                  }
+                  
                 </div>
               </div>
             </div>
