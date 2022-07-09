@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import auth from '../../firebase.init';
 import profileIcon from '../Photos/profile-icon.png';
 import { signOut } from "firebase/auth";
@@ -11,10 +11,15 @@ const Navber = () => {
         <div>
             <div class="navbar bg-base-100">
                 <div class="flex-1">
-                    <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+                    <a class="btn btn-ghost normal-case text-xl">WORK.com</a>
+                </div>
+                <div>
+                    <NavLink className="mr-5" to={"/"}>Home</NavLink>
+                    <NavLink className="mr-5" to={"/"}>Home</NavLink>
+                    <NavLink className="mr-5" to={"/"}>Home</NavLink>
                 </div>
                 <div class="flex-none">
-                    
+                   
                     <div class="dropdown dropdown-end">
                         <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                             <div class="w-10 rounded-full">
@@ -24,7 +29,7 @@ const Navber = () => {
                                 
                             </div>
                         </label>
-                        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        <ul tabindex="0" class="menu menu-compact bg-slate-200 dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
                                 <Link to={"profile"} class="justify-between">
                                     Profile
