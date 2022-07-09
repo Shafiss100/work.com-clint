@@ -19,9 +19,9 @@ const Navber = () => {
                         <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                             <div class="w-10 rounded-full">
                                 {
-                                    user.photoURL ? (<img src={user.photoURL} />):( <img src={profileIcon} />)
+                                    user.photoURL ? (<img  src={user.photoURL} />):( <img src={profileIcon} />)
                                 }
-                                <img src="https://placeimg.com/80/80/people" />
+                                
                             </div>
                         </label>
                         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">

@@ -1,0 +1,8 @@
+
+.worklist{
+background-color: rgb(228, 210, 245);
+width: 100%;
+height: 800px;
+overflow: scroll;
+overflow-x: hidden;
+}
