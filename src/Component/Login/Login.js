@@ -2,34 +2,99 @@ import React, { useState } from 'react';
 import "./Login.css";
 import facebook from "../Photos/facebook.png";
 import google from "../Photos/google.png";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
-import { signOut } from "firebase/auth";
 
 
 const Login = () => {
   const navigare = useNavigate();
-  const [user, userLoading, userError] = useAuthState(auth);
+  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
   const [
     signInWithEmailAndPassword,
     users,
     loading,
     error,
   ] = useSignInWithEmailAndPassword(auth);
+  const [user, userLoading, userError] = useAuthState(auth);
 
-  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
-  const glogin = () => {
-    signInWithGoogle()
-      .then(() => {
+
+  if(user){
+    fetch('http://localhost:5000/user', {
+      method: 'POST',
+      body: JSON.stringify({
+        userName: user.displayName,
+        email: user.email,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
         navigare("/")
-      })
-      .catch((error) => {
-        console.log(error.message);
       });
   }
 
-  const dlogin = (event) => {
+  
+  // send user name and email to the database ;
+  // if (user) {
+  //   fetch('http://localhost:5000/user', {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       userName: user.displayName,
+  //       email: user.email,
+  //     }),
+  //     headers: {
+  //       'Content-type': 'application/json; charset=UTF-8',
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       navigare("/")
+  //       console.log("done")
+  //     });
+    
+  // }
+
+
+
+  // login with google (react firebase hoook)
+  const glogin = () => {
+    signInWithGoogle()
+      .then(async () => {
+        console.log("donne")
+        // send user name and email to the database ;
+        const p = await user
+        if (p) {
+          console.log(user)
+          fetch('http://localhost:5000/user', {
+            method: 'POST',
+            body: JSON.stringify({
+              userName: user.displayName,
+              email: user.email,
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data)
+              navigare("/")
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+        navigare("/")
+      });
+  }
+
+  // login from the form (email and password)
+  const elogin = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
@@ -43,7 +108,7 @@ const Login = () => {
 
   }
   return (
-    <form onSubmit={dlogin}>
+    <form onSubmit={elogin}>
       <div className="hero min-h-screen login-page">
         <div >
           <div className="card w-full min-w-lg shadow-2xl ">
@@ -75,7 +140,6 @@ const Login = () => {
                 <div className='login-icons'>
                   <img onClick={glogin} src={google} alt="google" />
                   <img src={facebook} alt="facebook" />
-                  
                 </div>
               </div>
             </div>

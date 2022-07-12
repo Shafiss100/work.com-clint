@@ -15,8 +15,8 @@ const Navber = () => {
                 </div>
                 <div>
                     <NavLink className="mr-5" to={"/"}>Home</NavLink>
-                    <NavLink className="mr-5" to={"/"}>Home</NavLink>
-                    <NavLink className="mr-5" to={"/"}>Home</NavLink>
+                    <NavLink className="mr-5" to={"/"}>Notification</NavLink>
+                    <NavLink className="mr-5" to={"/"}>Message</NavLink>
                 </div>
                 <div class="flex-none">
                    
@@ -31,9 +31,8 @@ const Navber = () => {
                         </label>
                         <ul tabindex="0" class="menu menu-compact bg-slate-200 dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
-                                <Link to={"profile"} class="justify-between">
+                                <Link to={"/profile"} class="justify-between">
                                     Profile
-                                    
                                 </Link>
                             </li>
                            

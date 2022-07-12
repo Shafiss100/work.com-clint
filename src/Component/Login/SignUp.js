@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
@@ -8,24 +8,43 @@ const SignUp = () => {
     const navigare = useNavigate();
     const [
         createUserWithEmailAndPassword,
-        user,
+        euser,
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
 
     const signup = (event) => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
         const displayName = event.target.name.value;
+        console.log(email, password, displayName)
         createUserWithEmailAndPassword(email, password)
-            .then(async() => {
-                await updateProfile({displayName})
-                navigare("/")
+            .then(async () => {
+                await updateProfile({ displayName })
+                // send user name and email to the database ;
+                if (user) {
+                    console.log(user)
+                    fetch('http://localhost:5000/user', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            userName: displayName,
+                            email: email,
+                        }),
+                        headers: {
+                            'Content-type': 'application/json; charset=UTF-8',
+                        },
+                    })
+                        .then((response) => response.json())
+                        .then((data) => navigare("/"));
+                }
+
             })
             .catch((error) => {
                 console.log(error.message);
-            });
+            })
+
 
     }
     return (

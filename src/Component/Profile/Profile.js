@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Navber from '../Navber/Navber';
 import profileIcon from "../Photos/profile-icon.png"
@@ -25,7 +26,7 @@ const Profile = () => {
                                 <h1>Location (<span className='text-base-400'>district</span>) : { }</h1>
                                 <h1>Experince : { }</h1>
                                 <div className=''>
-                                    <button className='mx-auto btn border-x-lime-200 btn-primary'>Edit</button>
+                                    <Link className='mx-auto btn btn-primary' to={"/uprofile"}>Update</Link>
                                 </div>
                             </div>
                         </div>

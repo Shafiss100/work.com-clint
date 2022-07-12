@@ -6,8 +6,9 @@ const Work = () => {
     return (
         <div className=''>
             <div className='w-100 rounded-lg  m-2 p-2 '>
+                <button className='btn btn-secondary'><Link to={"/pwork"}>post work</Link></button>
                 <h1 className='text-3xl text-center mb-5'>WORK LIST</h1>
-                <div className='worklist p-2 rounded-lg w-100'>
+                <div className='worklist bg-primary p-2 rounded-lg w-100'>
                     
                     <ol itemType='1'>
 
@@ -15,50 +16,7 @@ const Work = () => {
                         <li>hi this is work list</li>
                         <li>hi this is work list</li>
                         <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
-                        <li>hi this is work list</li>
+                       
                     </ol>
                 </div>
             </div>
