@@ -10,23 +10,70 @@ const Uprofile = () => {
 
     const uLocation = (event) => {
         event.preventDefault();
-        const updateLocation = event.target.locationName.value;
-        console.log(updateLocation);
+        const userLocation = event.target.locationName.value;
+        fetch('http://localhost:5000/ulocation', {
+            method: 'PATCH',
+            body: JSON.stringify({
+                userLocation: userLocation,
+                userEmail : user.email
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => 
+                alert(`Your update is save ${data.message}`)
+            );
+        
     }
     const uEducation = (event) => {
         event.preventDefault();
-        const education = event.target.education.value;
-        console.log(education);
+        const userEducation = event.target.education.value;
+        fetch('http://localhost:5000/ueducation', {
+            method: 'PATCH',
+            body: JSON.stringify({
+                userEducation: userEducation,
+                userEmail: user.email
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => alert(`Your update is save ${data.message}`));
     }
     const uExperience = (event) => {
         event.preventDefault();
-        const experience = event.target.experience.value;
-        console.log(experience);
+        const userExperience = event.target.experience.value;
+        fetch('http://localhost:5000/uexperience', {
+            method: 'PATCH',
+            body: JSON.stringify({
+                userExperience: userExperience,
+                userEmail: user.email
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => alert(`Your update is save ${data.message}`));
     }
     const uExpart = (event) => {
         event.preventDefault();
-        const expart = event.target.expart.value;
-        console.log(expart);
+        const userExpart = event.target.expart.value;
+        fetch('http://localhost:5000/uexpart', {
+            method: 'PATCH',
+            body: JSON.stringify({
+                userExpart: userExpart,
+                userEmail: user.email
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => alert(`Your update is save ${data.message}`));
     }
 
 
@@ -63,11 +110,11 @@ const Uprofile = () => {
                                 <h1>Education : </h1><label for="modal-for-education" class="btn btn-primary">Edit</label>
                             </div>
                             <div className='flex justify-between align-item-middle'>
-                                <h1>Experience : </h1><label for="modal-for-education" class="btn btn-primary">Edit</label>
+                                <h1>Experience : </h1><label for="modal-for-experience" class="btn btn-primary">Edit</label>
                             </div>
                             
                             <div className='flex justify-between'>
-                                <h1>Expart in : </h1><button className='btn btn-primary'>edit</button>
+                                <h1>Expart in : </h1><label for="modal-for-expart" class="btn btn-primary">Edit</label>
                             </div>
                             <Link className=' btn btn-accent mx-10 mt-5' to={"/profile"}>Done</Link>
 
@@ -79,7 +126,8 @@ const Uprofile = () => {
                                     <h1>Location</h1>
                                     <input type="text" name='locationName' className='input input-bordered input-secondary w-full mt-5 max-w-xs' />
                                     <div class="modal-action">
-                                        <label for="modal-for-location" class="btn btn-primary" ><input className='btn btn-primary' type="submit" value={"save"} /></label>
+                                        <input className='btn btn-primary' type="submit" value={"save"} />
+                                        <label for="modal-for-location" class="btn btn-primary" >next</label>
                                     </div>
                                 </div>
                             </div>
@@ -88,10 +136,11 @@ const Uprofile = () => {
                             <input type="checkbox" id="modal-for-education" class="modal-toggle" />
                             <div class="modal modal-bottom sm:modal-middle">
                                 <div class="modal-box">
-                                    <h1>Location</h1>
+                                    <h1>Education</h1>
                                     <input type="text" name='education' className='input input-bordered input-secondary w-full mt-5 max-w-xs' />
                                     <div class="modal-action">
-                                        <label for="modal-for-education" class="btn btn-primary"><input type="submit" value={"save"} /></label>
+                                        <input className='btn btn-primary' type="submit" value={"save"} />
+                                        <label for="modal-for-education" class="btn btn-primary">next</label>
                                     </div>
                                 </div>
                             </div>
@@ -100,10 +149,11 @@ const Uprofile = () => {
                             <input type="checkbox" id="modal-for-experience" class="modal-toggle" />
                             <div class="modal modal-bottom sm:modal-middle">
                                 <div class="modal-box">
-                                    <h1>Location</h1>
+                                    <h1>Experience</h1>
                                     <input type="text" name='experience' className='input input-bordered input-secondary w-full mt-5 max-w-xs' />
                                     <div class="modal-action">
-                                        <label for="modal-for-experience" class="btn btn-primary"><input type="submit" value={"save"} /></label>
+                                        <input className='btn btn-primary' type="submit" value={"save"} />
+                                        <label for="modal-for-experience" class="btn btn-primary">next</label>
                                     </div>
                                 </div>
                             </div>
@@ -112,14 +162,16 @@ const Uprofile = () => {
                             <input type="checkbox" id="modal-for-expart" class="modal-toggle" />
                             <div class="modal modal-bottom sm:modal-middle">
                                 <div class="modal-box">
-                                    <h1>Location</h1>
+                                    <h1>Expart</h1>
                                     <input type="text" name='expart' className='input input-bordered input-secondary w-full mt-5 max-w-xs' />
                                     <div class="modal-action">
-                                        <label for="modal-for-expart" class="btn btn-primary"><input type="submit" value={"save"} /></label>
+                                        <input className='btn btn-primary' type="submit" value={"save"} />
+                                        <label for="modal-for-expart" class="btn btn-primary">next</label>
                                     </div>
                                 </div>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>

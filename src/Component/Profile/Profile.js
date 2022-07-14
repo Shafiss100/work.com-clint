@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
@@ -7,6 +8,11 @@ import profileIcon from "../Photos/profile-icon.png"
 
 const Profile = () => {
     const [user, loading, error] = useAuthState(auth);
+   useEffect(()=>{
+       fetch(`http://localhost:5000/user?email=${user.email}`)
+           .then((response) => response.json())
+           .then((data) => console.log(data));
+   },[user])
     return (
         <div>
             <Navber></Navber>
